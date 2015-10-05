@@ -5,6 +5,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
 
 import java.io.File;
@@ -59,6 +60,7 @@ public class ScreenshotListener extends TestListenerAdapter {
                     writeScreenshotToFile(new Augmenter().augment(driver), screenshot);
                 }
                 System.out.println("Written screenshot to " + screenshotAbsolutePath);
+                Reporter.log("<a href=\"" + screenshotAbsolutePath + "\"><p align=\"left\">Add New PR screenshot at " + new Date()+ "</p>")
             } else {
                 System.err.println("Unable to create " + screenshotAbsolutePath);
             }
