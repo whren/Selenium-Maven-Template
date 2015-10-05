@@ -114,7 +114,7 @@ public class GoogleExampleWebDriver extends DriverFactory {
         // Wait for the page to load, timeout after 10 seconds
         (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().startsWith("Failed!");
+                return d.getTitle().toLowerCase().startsWith("failed!");
             }
         });
 
