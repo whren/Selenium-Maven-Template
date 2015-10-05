@@ -121,6 +121,6 @@ public class GoogleExampleWebDriver extends DriverFactory {
         // Should see: "cheese! - Google Search"
         System.out.println("Page title is: " + driver.getTitle());
         String expectedStatus = "Failed!";
-        Assert.assertEquals(driver.getTitle(), expexctedStatus + "  - Recherche Google", "Error in title : ");
+        Assert.assertEquals(driver.getTitle(), expectedStatus + "  - Recherche Google", "Error in title : ");
     }
 }
