@@ -102,7 +102,7 @@ public class GoogleExampleWebDriver extends DriverFactory {
 
         // Enter something to search for
         element.clear();
-        element.sendKeys("Failed!");
+        element.sendKeys("Succeed!");
 
         // Now submit the form. WebDriver will find the form for us from the element
         element.submit();
@@ -114,12 +114,13 @@ public class GoogleExampleWebDriver extends DriverFactory {
         // Wait for the page to load, timeout after 10 seconds
         (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().startsWith("failed!");
+                return d.getTitle().toLowerCase().startsWith("succeed!");
             }
         });
 
         // Should see: "cheese! - Google Search"
         System.out.println("Page title is: " + driver.getTitle());
-        Assert.assertEquals(driver.getTitle(), "Succeed!", "Succeed! title was expected");
+        String expectedStatus = "Failed!";
+        Assert.assertEquals(driver.getTitle(), expexctedStatus + "  - Recherche Google", "Error in title : ");
     }
 }
