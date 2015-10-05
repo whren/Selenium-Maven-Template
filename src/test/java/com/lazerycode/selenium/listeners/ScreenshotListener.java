@@ -15,7 +15,6 @@ import java.io.IOException;
 import static com.lazerycode.selenium.DriverFactory.getDriver;
 
 public class ScreenshotListener extends TestListenerAdapter {
-
     private boolean createFile(File screenshot) {
         boolean fileCreated = false;
 
