@@ -52,7 +52,7 @@ public class ScreenshotListener extends TestListenerAdapter {
             WebDriver driver = getDriver();
             String screenshotDirectory = System.getProperty("screenshotDirectory");
             if (null == screenshotDirectory) {
-                screenshotDirectory = new File("").getAbsolutePath();
+                screenshotDirectory = new File("").getAbsolutePath() + File.separator + "target" + File.separator + "failsafe-reports";
             }
             String screenshotFileName = System.currentTimeMillis() + "_" + failingTest.getName() + ".png";
             String screenshotAbsolutePath = screenshotDirectory + File.separator + screenshotFileName;
