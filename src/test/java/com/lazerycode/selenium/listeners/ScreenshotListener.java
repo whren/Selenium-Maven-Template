@@ -51,7 +51,11 @@ public class ScreenshotListener extends TestListenerAdapter {
         try {
             WebDriver driver = getDriver();
             String screenshotDirectory = System.getProperty("screenshotDirectory");
-            String screenshotAbsolutePath = screenshotDirectory + File.separator + System.currentTimeMillis() + "_" + failingTest.getName() + ".png";
+            if (null == screenshotDirectory) {
+                screenshotDirectory = new File("").getAbsolutePath();
+            }
+            String screenshotFileName = System.currentTimeMillis() + "_" + failingTest.getName() + ".png";
+            String screenshotAbsolutePath = screenshotDirectory + File.separator + screenshotFileName;
             File screenshot = new File(screenshotAbsolutePath);
             if (createFile(screenshot)) {
                 try {
@@ -60,7 +64,7 @@ public class ScreenshotListener extends TestListenerAdapter {
                     writeScreenshotToFile(new Augmenter().augment(driver), screenshot);
                 }
                 System.out.println("Written screenshot to " + screenshotAbsolutePath);
-                Reporter.log("<a href=\"" + screenshotAbsolutePath + "\"><p align=\"left\">Add New PR screenshot at " + new Date()+ "</p>");
+                Reporter.log("<a href=\"" + screenshotFileName + "\"><p align=\"left\">Add New PR screenshot at " + new Date()+ "</p>");
             } else {
                 System.err.println("Unable to create " + screenshotAbsolutePath);
             }
