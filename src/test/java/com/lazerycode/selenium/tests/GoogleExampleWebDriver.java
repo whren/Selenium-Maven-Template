@@ -159,5 +159,10 @@ public class GoogleExampleWebDriver extends DriverFactory {
         get.submit();
 
         //value
+
+        value.clear();
+        value.sendKeys("Value_01");
+
+        put.submit();
     }
 }
