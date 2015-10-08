@@ -123,4 +123,41 @@ public class GoogleExampleWebDriver extends DriverFactory {
         String expectedStatus = "Failed!";
         Assert.assertEquals(driver.getTitle(), expectedStatus + "  - Recherche Google", "Error in title : ");
     }
+
+    @Test
+    public void accessWebProject() throws Exception {
+        // Create a new WebDriver instance
+        // Notice that the remainder of the code relies on the interface,
+        // not the implementation.
+        WebDriver driver = getDriver();
+
+        // And now use this to visit Google
+        driver.get("http://192.168.0.132:7001/web-project");
+        // Alternatively the same thing can be done like this
+        // driver.navigate().to("http://www.google.com");
+
+        // Find the text input element by its name
+        WebElement cacheName = driver.findElement(By.name("j_idt4:j_idt7"));
+
+        // Enter something to search for
+        cacheName.clear();
+        cacheName.sendKeys("Test");
+
+        WebElement key = driver.findElement(By.name("j_idt4:j_idt9"));
+        key.clear();
+        key.sendKeys("Test");
+
+        WebElement value = driver.findElement(By.name("j_idt4:j_idt11"));
+        value.clear();
+        value.sendKeys("Test_01");
+
+        WebElement get = driver.findElement(By.name("j_idt4:j_idt12"));
+
+        WebElement put = driver.findElement(By.name("j_idt4:j_idt13"));
+
+        // Now submit the form. WebDriver will find the form for us from the element
+        get.submit();
+
+        //value
+    }
 }
