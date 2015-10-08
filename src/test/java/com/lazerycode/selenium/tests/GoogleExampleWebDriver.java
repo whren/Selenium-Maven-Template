@@ -141,27 +141,23 @@ public class GoogleExampleWebDriver extends DriverFactory {
 
         // Enter something to search for
         cacheName.clear();
-        cacheName.sendKeys("Test");
+        cacheName.sendKeys("Test_01");
 
         WebElement key = driver.findElement(By.name("j_idt4:j_idt9"));
         key.clear();
-        key.sendKeys("Test");
-
-        WebElement value = driver.findElement(By.name("j_idt4:j_idt11"));
-        value.clear();
-        value.sendKeys("Test_01");
+        key.sendKeys("Key_01");
 
         WebElement get = driver.findElement(By.name("j_idt4:j_idt12"));
-
-        WebElement put = driver.findElement(By.name("j_idt4:j_idt13"));
 
         // Now submit the form. WebDriver will find the form for us from the element
         get.submit();
 
         //value
-
+        WebElement value = driver.findElement(By.name("j_idt4:j_idt11"));
         value.clear();
         value.sendKeys("Value_01");
+
+        WebElement put = driver.findElement(By.name("j_idt4:j_idt13"));
 
         put.submit();
     }
