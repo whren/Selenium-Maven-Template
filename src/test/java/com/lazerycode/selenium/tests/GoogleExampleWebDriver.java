@@ -120,7 +120,7 @@ public class GoogleExampleWebDriver extends DriverFactory {
 
         // Should see: "cheese! - Google Search"
         System.out.println("Page title is: " + driver.getTitle());
-        String expectedStatus = "Failed!";
+        String expectedStatus = "Succeed!";
         Assert.assertEquals(driver.getTitle(), expectedStatus + "  - Recherche Google", "Error in title : ");
     }
 
@@ -132,7 +132,7 @@ public class GoogleExampleWebDriver extends DriverFactory {
         WebDriver driver = getDriver();
 
         // And now use this to visit Google
-        driver.get("http://192.168.0.132:7001/web-project");
+        driver.get(System.getEnv("baseTestUrl") + "/web-project");
         // Alternatively the same thing can be done like this
         // driver.navigate().to("http://www.google.com");
 
