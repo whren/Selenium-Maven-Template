@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Boolean;
 
 import static com.lazerycode.selenium.DriverFactory.getDriver;
 
@@ -48,7 +49,7 @@ public class ScreenshotListener extends TestListenerAdapter {
 
     @Override
     public void onTestFailure(ITestResult failingTest) {
-        boolean screenshotEnabled = (null == System.getProperty("screenshot") ? false : System.getProperty("screenshot"));
+        boolean screenshotEnabled = (null == System.getProperty("screenshot") ? false : Boolean.valueOf(System.getProperty("screenshot")));
         if (screenshotEnabled) {
             try {
                 WebDriver driver = getDriver();
