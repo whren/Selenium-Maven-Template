@@ -48,29 +48,32 @@ public class ScreenshotListener extends TestListenerAdapter {
 
     @Override
     public void onTestFailure(ITestResult failingTest) {
-        try {
-            WebDriver driver = getDriver();
-            String screenshotDirectory = System.getProperty("screenshotDirectory");
-            if (null == screenshotDirectory) {
-                screenshotDirectory = new File("").getAbsolutePath() + File.separator + "target" + File.separator + "failsafe-reports";
-            }
-            String screenshotFileName = System.currentTimeMillis() + "_" + failingTest.getName() + ".png";
-            String screenshotAbsolutePath = screenshotDirectory + File.separator + screenshotFileName;
-            File screenshot = new File(screenshotAbsolutePath);
-            if (createFile(screenshot)) {
-                try {
-                    writeScreenshotToFile(driver, screenshot);
-                } catch (ClassCastException weNeedToAugmentOurDriverObject) {
-                    writeScreenshotToFile(new Augmenter().augment(driver), screenshot);
+        boolean screenshotEnabled = (null == System.getProperty("screenshot") ? false : System.getProperty("screenshot"));
+        if (screenshotEnabled) {
+            try {
+                WebDriver driver = getDriver();
+                String screenshotDirectory = System.getProperty("screenshotDirectory");
+                if (null == screenshotDirectory) {
+                    screenshotDirectory = new File("").getAbsolutePath() + File.separator + "target" + File.separator + "failsafe-reports";
                 }
-                System.out.println("Written screenshot to " + screenshotAbsolutePath);
-                Reporter.log("<a href=\"" + screenshotFileName + "\"><p align=\"left\">Add New PR screenshot at " + new Date()+ "</p>");
-            } else {
-                System.err.println("Unable to create " + screenshotAbsolutePath);
+                String screenshotFileName = System.currentTimeMillis() + "_" + failingTest.getName() + ".png";
+                String screenshotAbsolutePath = screenshotDirectory + File.separator + screenshotFileName;
+                File screenshot = new File(screenshotAbsolutePath);
+                if (createFile(screenshot)) {
+                    try {
+                        writeScreenshotToFile(driver, screenshot);
+                    } catch (ClassCastException weNeedToAugmentOurDriverObject) {
+                        writeScreenshotToFile(new Augmenter().augment(driver), screenshot);
+                    }
+                    System.out.println("Written screenshot to " + screenshotAbsolutePath);
+                    Reporter.log("<a href=\"" + screenshotFileName + "\"><p align=\"left\">Add New PR screenshot at " + new Date()+ "</p>");
+                } else {
+                    System.err.println("Unable to create " + screenshotAbsolutePath);
+                }
+            } catch (Exception ex) {
+                System.err.println("Unable to capture screenshot...");
+                ex.printStackTrace();
             }
-        } catch (Exception ex) {
-            System.err.println("Unable to capture screenshot...");
-            ex.printStackTrace();
         }
     }
 }
