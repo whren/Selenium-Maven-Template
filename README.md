@@ -63,3 +63,6 @@ You have probably got outdated driver binaries, by default they are not overwrit
 
 - mvn clean verify -Doverwrite.binaries=true
 - Delete the selenium_standalone_binaries folder in your resources directory
+- 
+
+Test
